@@ -12,7 +12,7 @@ const server = express()
 const whitelist = [
 	'localhost:3000',
 	'localhost:8080',
-	'https://braclet-designer.herokuapp.com'
+	'braclet-designer.herokuapp.com'
 ]
 
 const corsOptions = {
@@ -23,7 +23,7 @@ const corsOptions = {
 			callback(null, true)
 		} else {
 			console.log("Origin rejected")
-			callback(new Error('Not allowed by CORS'))
+			callback(new Error('Not allowed by CORS - ' + origin))
 		}
 	}
 }
