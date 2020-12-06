@@ -5,20 +5,20 @@ const express = require('express')
 const path = require('path')
 const serveStatic = require('serve-static')
 
-const stampRouter = require('./routes/StampRouter')
+const blanksRouter = require('./routes/blanks-router')
 
 const server = express()
 
 const whitelist = [
-	'http://localhost:3000',
-	'http://localhost:8080',
-	'https://bracelet-designer.herokuapp.com'
+	'localhost:3000',
+	'localhost:8080',
+	'bracelet-designer.herokuapp.com'
 ]
 
 const corsOptions = {
 	origin: function (origin, callback) {
-		console.log("** Origin of request " + origin)
-		if (whitelist.indexOf(origin) !== -1 || !origin) {
+		console.log("** Origin of request " + origin.headers.host)
+		if (whitelist.indexOf(origin.headers.host) !== -1 || !origin) {
 			console.log("Origin acceptable")
 			callback(null, true)
 		} else {
@@ -29,14 +29,14 @@ const corsOptions = {
 }
 
 server.use(express.json())
-server.use(cors(corsOptions))
+server.use(cors(corsOptions.origin))
 server.use(serveStatic(__dirname + '/client/build'))
 
 server.get("/", (req, res) => {
 	res.send({ message: "Hello World!" })
 })
 
-server.use('/api/stamps', stampRouter)
+server.use('/api/blanks', blanksRouter)
 
 server.use((err, req, res, next) => {
 	if (err) {

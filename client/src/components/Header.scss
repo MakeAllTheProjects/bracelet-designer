@@ -1,0 +1,22 @@
+@import '../variables.scss';
+
+.header {
+	position: fixed;
+	top:0;
+	right: 1.25rem;
+	left: 1rem;
+	@include center-h;
+	justify-content: space-between;
+	height: 5rem;
+
+	.logo {
+		height: 2.75rem;
+		filter: invert(70%) drop-shadow($black5 1px 1px 10px);
+	}
+
+	.github {
+		height: 2.75rem;
+		filter: invert(80%);
+		margin-bottom: 0.25rem;
+	}
+}

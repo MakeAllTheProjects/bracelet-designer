@@ -1,0 +1,26 @@
+@import './variables.scss';
+
+* {
+	font-size: 10px;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.app {
+	min-height: 100vh;
+	min-width: 100vw;
+	background: url('./assets/colorfultriangles.jpg');
+	background-size: cover;
+	background-position: center;
+
+	.app-container {
+    position: fixed;
+    top: 5rem;
+    right: 2rem;
+    bottom: 3rem;
+    left: 2rem;
+    @include center-v;
+    border-radius: 2rem;
+		background-color: $white15;
+	}
+}

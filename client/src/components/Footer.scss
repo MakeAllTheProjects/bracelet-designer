@@ -1,0 +1,10 @@
+@import '../variables.scss';
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	top: calc(100vh - 4rem);
+	left: 0.75rem;
+	right: 0.75rem;
+	@include center-h;
+}

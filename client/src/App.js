@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.scss'
+
+import Footer from './components/Footer'
+import Header from './components/Header'
+import PickBlank from './components/PickBlank'
+
+export const baseURL = process.env.IS_PRODUCTION ? 'https://bracelet-designer.herokuapp.com' : 'http://localhost:8080'
+
+export default function App () {
+	const [selectedBlank, setSelectedBlank] = React.useState({})
+
+	console.log("selectedBlank", selectedBlank)
+
+	return (
+		<div className="app">
+			<Header/>
+			<main className="app-container">
+				<PickBlank
+					selectedBlank={selectedBlank}
+					setSelectedBlank={setSelectedBlank}
+				/>
+			</main>
+			<Footer/>
+		</div>
+	)
 }
-
-export default App;
