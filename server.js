@@ -12,7 +12,7 @@ const server = express()
 const whitelist = [
 	'localhost:3000',
 	'localhost:8080',
-	'bracelet-designer.herokuapp.com'
+	'https://braclet-designer.herokuapp.com'
 ]
 
 const corsOptions = {
