@@ -1,0 +1,21 @@
+@import '../variables.scss';
+
+.bracelet-container {
+	margin: 2rem 0 2rem 0;
+	width: 85vw;
+
+	.bracelet {
+		@include center-h;
+		width: 85vw;
+		background: linear-gradient(rgba(9, 136, 247, 0.25), rgba(122, 183, 230, 0.5)), url('../assets/metal-texture.jpg');
+		background-size: cover, cover;
+		background-position: center, center;
+		box-shadow: rgb(79, 81, 85) 0.3rem 0.3rem 0.1rem,
+								inset rgba(255, 255, 255, 0.25) 0.2rem 0.2rem 0.3rem,
+								inset rgba(0, 0, 0, 0.25) -0.2rem -0.2rem 0.6rem,
+								rgba(0, 0, 0, 0.25) 0.5rem 0.5rem 0.5rem,
+								rgba(0, 0, 0, 0.25) 1rem 1.5rem 1rem,
+								inset rgba(255, 255, 255, 0.25) -0.1rem -0.1rem 0.2rem;
+		overflow: hidden;
+	}
+}

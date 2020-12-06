@@ -17,7 +17,7 @@ export default function PickBlank (props) {
 					const blanks = res.data.blanks.map(blank => {
 						return {
 							value: blank,
-							label: `${blank.width}" x ${blank.length}" - ${blank.metal}`
+							label: `${blank.shape.charAt(0).toUpperCase()}${blank.shape.slice(1)} - ${blank.width}" x ${blank.length}" - ${blank.metal}`
 						}
 					})
 					setBlanksOptions(blanks)
