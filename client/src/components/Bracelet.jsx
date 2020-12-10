@@ -16,6 +16,8 @@ export default function Bracelet (props) {
 							? 'hue-rotate(200deg) saturate(250%)'
 							: 'grayscale(100%)'
 					: 'grayscale(100%)'
+				,
+				transition: 'all ease 1s'
 			}}
 		>
 			<div
