@@ -32,13 +32,9 @@ export default function Stamps (props) {
 					key={stamp.id}
 					className="stamp"
 					style={
-						stamps[stampSetNames[currentSet]].includes("symbol")
-						? {
-							height: `${stamp.size}rem`
-						}
-						: {
-							height: `${stamp.size}rem`,
-							width: `${stamp.size}rem`
+						{
+							height: `${stamp.size / 1.5}rem`,
+							width: stamps[stampSetNames[currentSet]].includes("symbol") ? 'auto' : `${stamp.size / 1.5}rem`
 						}
 					}
 				>
