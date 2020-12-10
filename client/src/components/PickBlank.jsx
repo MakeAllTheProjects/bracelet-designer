@@ -21,6 +21,7 @@ export default function PickBlank (props) {
 						}
 					})
 					setBlanksOptions(blanks)
+					setSelectedBlank(blanks[0])
 				})
 		}
 	}, [blanksOptions])

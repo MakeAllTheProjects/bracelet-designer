@@ -1,0 +1,21 @@
+@import '../variables.scss';
+
+.stamps {
+	@include center-h;
+	flex-wrap: wrap;
+	.stamp {
+		@include center-h;
+		width: auto;
+		height: 6rem;
+		padding: 0.5rem;
+		background: $white5;
+		border-radius: 1rem;
+		margin: 1rem;
+		box-shadow: $black25 0.5rem 0.5rem 0.5rem;
+
+		img {
+			max-height: 80%;
+			max-width: 80%;
+		}
+	}
+}
