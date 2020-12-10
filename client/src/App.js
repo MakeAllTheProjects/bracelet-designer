@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 
 import './App.scss'
@@ -11,8 +12,15 @@ export const baseURL = process.env.IS_PRODUCTION ? 'https://bracelet-designer.he
 
 export default function App () {
 	const [selectedBlank, setSelectedBlank] = React.useState({})
+	const [stamps, setStamps] = React.useState([])
 
-	console.log("selectedBlank", selectedBlank)
+	React.useEffect(() => {
+		console.log('stamps?')
+		axios.get(`${baseURL}/api/stamps`)
+			.then(res => {
+				console.log(res.data)
+			})
+	}, [stamps])
 
 	return (
 		<div className="app">

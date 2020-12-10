@@ -6,6 +6,7 @@ const path = require('path')
 const serveStatic = require('serve-static')
 
 const blanksRouter = require('./routes/blanks-router')
+const stampsRouter = require('./routes/stamps-router')
 
 const server = express()
 
@@ -37,6 +38,7 @@ server.get("/", (req, res) => {
 })
 
 server.use('/api/blanks', blanksRouter)
+server.use('/api/stamps', stampsRouter)
 
 server.use((err, req, res, next) => {
 	if (err) {

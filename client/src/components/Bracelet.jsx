@@ -4,8 +4,6 @@ import './Bracelet.scss'
 export default function Bracelet (props) {
 	const { bracelet } = props
 
-	console.log(bracelet)
-
 	return (
 		<section
 			className="bracelet-container"

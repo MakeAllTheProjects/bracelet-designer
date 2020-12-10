@@ -1,6 +1,6 @@
 const express = require('express')
-var Airtable = require('airtable');
-var base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base('appXLEvFCfir1UknZ')
+const Airtable = require('airtable')
+const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base('appXLEvFCfir1UknZ')
 
 const blanksRouter = express.Router()
 
