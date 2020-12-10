@@ -24,7 +24,7 @@ export default function App () {
 				<Bracelet
 					bracelet={selectedBlank}
 				/>
-				<Stamps/>
+				{selectedBlank.shape && <Stamps blankSize={selectedBlank.width}/>}
 			</main>
 			<Footer/>
 		</div>
