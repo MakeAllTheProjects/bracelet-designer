@@ -48,7 +48,7 @@ export default function PickBlank (props) {
 		}),
 		menu: (provided, state) => ({
 			...provided,
-			backgroundColor: 'rgba(255, 255, 255, 0.45)'
+			backgroundColor: 'rgba(255, 255, 255, 0.8)'
 		}),
 		noOptionsMessage: (provided, state) => ({
 			...provided,
