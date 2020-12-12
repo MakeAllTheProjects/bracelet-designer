@@ -17,9 +17,10 @@
     position: fixed;
     top: 5rem;
     right: 2rem;
-    bottom: 3rem;
-    left: 2rem;
-    @include center-v;
+		left: 2rem;
+		@include center-v;
+		min-height: calc(100vh - 7rem);
+		padding: 3rem 0 3rem 0;
     border-radius: 2rem;
 		background-color: $white15;
 	}

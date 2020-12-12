@@ -2,22 +2,52 @@
 
 .stamps {
 	@include center-h;
-	flex-wrap: wrap;
-	max-width: 40rem;
-	.stamp {
-		@include center-h;
-		padding: 0.5rem;
-		background: $white5;
-		border-radius: 1rem;
-		margin: 0.5rem;
+	display: grid;
+	grid-template-columns: 9rem auto 9rem;
 
-		img {
-			max-height: 80%;
-			max-width: 80%;
+	.stamp-set {
+		grid-column: 2/3;
+		@include center-h;
+		flex-wrap: wrap;
+		max-width: 40rem;
+		margin: 0 5% 0 5%;
+
+		.stamp {
+			@include center-h;
+			padding: 0.5rem;
+			background: $white5;
+			border-radius: 1rem;
+			margin: 0.5rem;
+
+			img {
+				max-height: 80%;
+				max-width: 80%;
+			}
+		}
+
+		.stamp:hover {
+			border: solid 3px $white15;
 		}
 	}
 
-	.stamp:hover {
-		border: solid 3px $white15;
+	.arrow {
+		margin: 0 3rem 0 3rem;
+		width: 4rem;
+		filter: invert(90%) opacity(80%);
+		cursor: pointer;
+	}
+
+	.arrow:hover {
+		filter: invert(90%) opacity(70%) drop-shadow($white65 1px 1px 0.5rem);
+	}
+
+	.arrow.left {
+		grid-column: 1/2;
+		transform: rotate(90deg);
+	}
+
+	.arrow.right {
+		grid-column: 3/4;
+		transform: rotate(270deg);
 	}
 }

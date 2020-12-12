@@ -14,12 +14,6 @@ export default function Header () {
 				src={logo}
 				title="geekerymade"
 			/>
-			<img
-				alt="github repo"
-				className="github"
-				src={githubLogo}
-				title="github repo"
-			/>
 		</header>
 	)
 }
