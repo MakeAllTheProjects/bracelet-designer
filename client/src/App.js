@@ -8,7 +8,7 @@ import Header from './components/Header'
 import PickBlank from './components/PickBlank'
 import Stamps from './components/Stamps'
 
-export const baseURL = process.env.IS_PRODUCTION ? 'https://bracelet-designer.herokuapp.com' : 'http://localhost:8080'
+export const baseURL = process.env.REACT_APP_IS_PRODUCTION ? 'https://braclet-designer.herokuapp.com' : 'http://localhost:8080'
 
 export default function App () {
 	const [selectedBlank, setSelectedBlank] = React.useState({})
