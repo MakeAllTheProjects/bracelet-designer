@@ -7,7 +7,11 @@ import { baseURL } from '../App'
 import './PickBlank.scss'
 
 export default function PickBlank (props) {
-	const { selectedBlank, setSelectedBlank } = props
+	const { 
+		selectedBlank, 
+		setSelectedBlank, 
+		largestStamp 
+	} = props
 	const [blanksOptions, setBlanksOptions] = React.useState([])
 	
 	React.useEffect(() => {
@@ -77,6 +81,7 @@ export default function PickBlank (props) {
 					styles={selectStyles}
 					options={blanksOptions}
 					onChange={({value}) => setSelectedBlank(value)}
+					isOptionDisabled={(option) => option.value.width * 25.4 < largestStamp }
 				/>
 			)}
 		</form>

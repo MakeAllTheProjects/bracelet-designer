@@ -10,6 +10,8 @@ import arrow from '../assets/down-arrow-2.svg'
 export default function Stamps (props) {
 	const { 
 		blankSize,
+		largestStamp,
+		setLargestStamp,
 		selectedStamps,
 		setSelectedStamps
 	} = props
@@ -50,6 +52,9 @@ export default function Stamps (props) {
 		if (fitsBlank) {
 			const newStampSet = [...selectedStamps, stamp]
 			setSelectedStamps(newStampSet)
+			if (stamp.size > largestStamp) {
+				setLargestStamp(stamp.size)
+			}
 		}
 	}
 
