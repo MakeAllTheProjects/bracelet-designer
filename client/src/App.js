@@ -12,6 +12,7 @@ export const baseURL = process.env.REACT_APP_IS_PRODUCTION ? 'https://braclet-de
 
 export default function App () {
 	const [selectedBlank, setSelectedBlank] = React.useState({})
+	const [selectedStamps, setSelectedStamps] = React.useState([])
 
 	return (
 		<div className="app">
@@ -23,8 +24,15 @@ export default function App () {
 				/>
 				<Bracelet
 					bracelet={selectedBlank}
+					selectedStamps={selectedStamps}
 				/>
-				{selectedBlank.shape && <Stamps blankSize={selectedBlank.width}/>}
+				{selectedBlank.shape && (
+					<Stamps 
+						blankSize={selectedBlank.width}
+						selectedStamps={selectedStamps}
+						setSelectedStamps={setSelectedStamps}
+					/>
+				)}
 			</main>
 			<Footer/>
 		</div>

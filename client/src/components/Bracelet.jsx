@@ -2,7 +2,7 @@ import React from 'react'
 import './Bracelet.scss'
 
 export default function Bracelet (props) {
-	const { bracelet } = props
+	const { bracelet, selectedStamps } = props
 
 	return (
 		<section
@@ -27,7 +27,18 @@ export default function Bracelet (props) {
 					borderRadius: bracelet && bracelet.shape === "tapered" ? '100%' : '15rem'
 				}}
 			>
-
+				{selectedStamps.length > 0 && selectedStamps.map(stamp => (
+					<img
+						className="stamped"
+						alt={stamp.text}	
+						key={stamp.id}
+						src={stamp.symbol.url}
+						style={{
+							height: `calc(${(stamp.size * 0.0383) * 15}vw)`
+						}}
+						title={stamp.text}
+					/>
+				))}
 			</div>
 		</section>
 	)

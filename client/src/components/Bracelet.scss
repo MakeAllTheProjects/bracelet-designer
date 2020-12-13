@@ -18,5 +18,10 @@
 								inset rgba(255, 255, 255, 0.25) -0.1rem -0.1rem 0.2rem;
 		overflow: hidden;
 		transition: all ease 1s;
+
+		.stamped {
+			margin: 0 0.2rem 0 0.2rem;
+			filter: opacity(65%) drop-shadow($white65 2px 2px 2px);
+		}
 	}
 }

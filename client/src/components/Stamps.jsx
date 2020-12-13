@@ -8,7 +8,12 @@ import './Stamps.scss'
 import arrow from '../assets/down-arrow-2.svg'
 
 export default function Stamps (props) {
-	const { blankSize } = props
+	const { 
+		blankSize,
+		selectedStamps,
+		setSelectedStamps
+	} = props
+
 	const [stampSetNames, setStampSetNames] = React.useState([])
 	const [stamps, setStamps] = React.useState({})
 	const [currentSet, setCurrentSet] = React.useState(0)
@@ -41,6 +46,13 @@ export default function Stamps (props) {
 		}
 	}
 
+	const selectStamp = (stamp, fitsBlank) => {
+		if (fitsBlank) {
+			const newStampSet = [...selectedStamps, stamp]
+			setSelectedStamps(newStampSet)
+		}
+	}
+
 	return (
 		<section className="stamps">
 			<img
@@ -51,29 +63,33 @@ export default function Stamps (props) {
 				onClick={() => prevStampSet()}
 			/>
 			<div className="stamp-set">
-				{stampSetNames.length > 0 && stamps[stampSetNames[currentSet]].map(stamp => (
-					<div
-						key={stamp.id}
-						className="stamp"
-						style={
-							{
-								height: `${stamp.size / 1.75}rem`,
-								width: stamps[stampSetNames[currentSet]].includes("symbol") ? 'auto' : `${stamp.size / 1.75}rem`,
-								background: blankSize > stamp.size * 0.0393701 ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.15)',
-								boxShadow: blankSize > stamp.size * 0.0393701 ? 'rgba(0, 0, 0, 0.25) 0.5rem 0.5rem 0.5rem' : 'none'
+				{stampSetNames.length > 0 && stamps[stampSetNames[currentSet]].map(stamp => {
+					const fitsBlank = blankSize > (stamp.size * 0.0393701) + 0.015
+					return (
+						<div
+							key={stamp.id}
+							className="stamp"
+							style={
+								{
+									height: `${stamp.size / 1.75}rem`,
+									width: stamps[stampSetNames[currentSet]].includes("symbol") ? 'auto' : `${stamp.size / 1.75}rem`,
+									background: fitsBlank ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.15)',
+									boxShadow: fitsBlank ? 'rgba(0, 0, 0, 0.25) 0.5rem 0.5rem 0.5rem' : 'none'
+								}
 							}
-						}
-						title={stamp.text}
-					>
-						<img
-							alt={stamp.text}
-							src={stamp.symbol.url}
-							style={{
-								opacity: blankSize > stamp.size * 0.0393701 ? '100%' : '30%'
-							}}
-						/>
-					</div>
-				))}
+							title={stamp.text}
+							onClick={() => selectStamp(stamp, fitsBlank)}
+						>
+							<img
+								alt={stamp.text}
+								src={stamp.symbol.url}
+								style={{
+									opacity: fitsBlank ? '100%' : '30%'
+								}}
+							/>
+						</div>
+					)
+				})}
 			</div>
 			<img
 				alt="go forward"
