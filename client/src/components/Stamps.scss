@@ -9,6 +9,7 @@
 		.stamp-controls {
 			@include center-h;
 			height: 3rem;
+			margin-bottom: 1.5rem;
 
 			.stamp-control-button {
 				@include keyboard-button;
@@ -22,7 +23,7 @@
 			grid-column: 2/3;
 			@include center-h;
 			flex-wrap: wrap;
-			max-width: 40rem;
+			max-width: 65rem;
 			margin: 0 5% 0 5%;
 
 			.stamp {
