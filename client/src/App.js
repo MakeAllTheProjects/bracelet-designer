@@ -14,11 +14,13 @@ export default function App () {
 	const [selectedBlank, setSelectedBlank] = React.useState({})
 	const [selectedStamps, setSelectedStamps] = React.useState([])
 	const [largestStamp, setLargestStamp] = React.useState(0)
+	const [errorMessage, setErrorMessage] = React.useState("")
 
 	return (
 		<div className="app">
 			<Header/>
 			<main className="app-container">
+				{errorMessage && <div className="error-message">{errorMessage}</div>}
 				<PickBlank
 					largestStamp={largestStamp}
 					selectedBlank={selectedBlank}
@@ -35,6 +37,7 @@ export default function App () {
 						setLargestStamp={setLargestStamp}
 						selectedStamps={selectedStamps}
 						setSelectedStamps={setSelectedStamps}
+						setErrorMessage={setErrorMessage}
 					/>
 				)}
 			</main>

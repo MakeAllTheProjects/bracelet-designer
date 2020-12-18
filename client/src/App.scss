@@ -23,5 +23,12 @@
 		padding: 3rem 0 3rem 0;
     border-radius: 2rem;
 		background-color: $white15;
+
+		.error-message {
+			@include keyboard-button;
+			background-color: rgba(255, 50, 50, 0.5);
+			color: white;
+			padding: 1rem 3rem 1rem 3rem;
+		}
 	}
 }

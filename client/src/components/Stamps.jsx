@@ -6,6 +6,7 @@ import { baseURL } from '../App'
 import './Stamps.scss'
 
 import arrow from '../assets/down-arrow-2.svg'
+import spaceIcon from '../assets/rounded-black-square-shape.svg'
 
 export default function Stamps (props) {
 	const { 
@@ -13,7 +14,8 @@ export default function Stamps (props) {
 		largestStamp,
 		setLargestStamp,
 		selectedStamps,
-		setSelectedStamps
+		setSelectedStamps,
+		setErrorMessage
 	} = props
 
 	const [stampSetNames, setStampSetNames] = React.useState([])
@@ -50,16 +52,23 @@ export default function Stamps (props) {
 
 	const selectStamp = (stamp, fitsBlank) => {
 		if (fitsBlank) {
-			const newStampSet = [...selectedStamps, stamp]
-			setSelectedStamps(newStampSet)
-			if (stamp.size > largestStamp) {
-				setLargestStamp(stamp.size)
+			if (selectedStamps.length < 40) {
+				const newStampSet = [...selectedStamps, stamp]
+				setSelectedStamps(newStampSet)
+				if (stamp.size > largestStamp) {
+					setLargestStamp(stamp.size)
+				}
+			} else {
+				setErrorMessage("Sorry, only 40 characters can fit on this bracelet")
 			}
 		}
 	}
 
 	const removeStamp = () => {
 		if(selectedStamps.length > 0) {
+			if (selectedStamps.length === 40) {
+				setErrorMessage("")
+			}
 			const newSelectedStamps = selectedStamps.splice(0, selectedStamps.length - 1)
 			setSelectedStamps(newSelectedStamps)
 		}
@@ -67,7 +76,29 @@ export default function Stamps (props) {
 
 	const clearStamps = () => {
 		if (selectedStamps.length > 0) {
+			if (selectedStamps.length === 40) {
+				setErrorMessage("")
+			}
 			setSelectedStamps([])
+		}
+	}
+
+	const addSpace = () => {
+		if (selectedStamps.length < 40) {
+			const newStampSet = [
+				...selectedStamps,
+				{
+					id: 'space',
+					size: 2,
+					symbol: {
+						img_id: 'space-svg',
+						url: spaceIcon
+					}
+				}
+			]
+			setSelectedStamps(newStampSet)
+		} else {
+			setErrorMessage("Sorry, only 40 characters can fit on this bracelet")
 		}
 	}
 
@@ -82,6 +113,12 @@ export default function Stamps (props) {
 			/>
 			<div className="stamp-keyboard">
 				<div className="stamp-controls">
+					<div
+						className="stamp-control-button"
+						onClick={() => addSpace()}
+					>
+						Space
+					</div>
 					<div 
 						className="stamp-control-button" 
 						onClick={() => removeStamp()}
