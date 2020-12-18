@@ -58,6 +58,19 @@ export default function Stamps (props) {
 		}
 	}
 
+	const removeStamp = () => {
+		if(selectedStamps.length > 0) {
+			const newSelectedStamps = selectedStamps.splice(0, selectedStamps.length - 1)
+			setSelectedStamps(newSelectedStamps)
+		}
+	}
+
+	const clearStamps = () => {
+		if (selectedStamps.length > 0) {
+			setSelectedStamps([])
+		}
+	}
+
 	return (
 		<section className="stamps">
 			<img
@@ -67,34 +80,51 @@ export default function Stamps (props) {
 				src={arrow}
 				onClick={() => prevStampSet()}
 			/>
-			<div className="stamp-set">
-				{stampSetNames.length > 0 && stamps[stampSetNames[currentSet]].map(stamp => {
-					const fitsBlank = blankSize > (stamp.size * 0.0393701) + 0.015
-					return (
-						<div
-							key={stamp.id}
-							className="stamp"
-							style={
-								{
-									height: `${stamp.size / 1.75}rem`,
-									width: stamps[stampSetNames[currentSet]].includes("symbol") ? 'auto' : `${stamp.size / 1.75}rem`,
-									background: fitsBlank ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.15)',
-									boxShadow: fitsBlank ? 'rgba(0, 0, 0, 0.25) 0.5rem 0.5rem 0.5rem' : 'none'
+			<div className="stamp-keyboard">
+				<div className="stamp-controls">
+					<div 
+						className="stamp-control-button" 
+						onClick={() => removeStamp()}
+					>
+						Backspace
+					</div>
+					<div 
+						className="stamp-control-button"
+						onClick={() => clearStamps()}
+					>
+						Clear
+					</div>
+				</div>
+				<div className="stamp-set">
+					{stampSetNames.length > 0 && stamps[stampSetNames[currentSet]].map(stamp => {
+						const fitsBlank = blankSize > (stamp.size * 0.0393701) + 0.015
+						console.log(stamp.size)
+						return (
+							<div
+								key={stamp.id}
+								className="stamp"
+								style={
+									{
+										height: `${stamp.size * 0.75}rem`,
+										width: stamps[stampSetNames[currentSet]].includes("symbol") ? 'auto' : `${stamp.size * 0.75}rem`,
+										background: fitsBlank ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.15)',
+										boxShadow: fitsBlank ? 'rgba(0, 0, 0, 0.25) 0.5rem 0.5rem 0.5rem' : 'none'
+									}
 								}
-							}
-							title={stamp.text}
-							onClick={() => selectStamp(stamp, fitsBlank)}
-						>
-							<img
-								alt={stamp.text}
-								src={stamp.symbol.url}
-								style={{
-									opacity: fitsBlank ? '100%' : '30%'
-								}}
-							/>
-						</div>
-					)
-				})}
+								title={stamp.text}
+								onClick={() => selectStamp(stamp, fitsBlank)}
+							>
+								<img
+									alt={stamp.text}
+									src={stamp.symbol.url}
+									style={{
+										opacity: fitsBlank ? '100%' : '30%'
+									}}
+								/>
+							</div>
+						)
+					})}
+				</div>
 			</div>
 			<img
 				alt="go forward"

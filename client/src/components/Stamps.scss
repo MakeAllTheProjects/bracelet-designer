@@ -5,28 +5,35 @@
 	display: grid;
 	grid-template-columns: 9rem auto 9rem;
 
-	.stamp-set {
-		grid-column: 2/3;
-		@include center-h;
-		flex-wrap: wrap;
-		max-width: 40rem;
-		margin: 0 5% 0 5%;
-
-		.stamp {
+	.stamp-keyboard {
+		.stamp-controls {
 			@include center-h;
-			padding: 0.5rem;
-			background: $white5;
-			border-radius: 1rem;
-			margin: 0.5rem;
+			height: 3rem;
 
-			img {
-				max-height: 80%;
-				max-width: 80%;
+			.stamp-control-button {
+				@include keyboard-button;
+				padding: 0.5rem 3rem 0.5rem 3rem;
+				@include font-two;
+				text-transform: uppercase;
 			}
 		}
 
-		.stamp:hover {
-			border: solid 3px $white15;
+		.stamp-set {
+			grid-column: 2/3;
+			@include center-h;
+			flex-wrap: wrap;
+			max-width: 40rem;
+			margin: 0 5% 0 5%;
+
+			.stamp {
+				@include center-h;
+				@include keyboard-button;
+
+				img {
+					max-height: 80%;
+					max-width: 80%;
+				}
+			}
 		}
 	}
 
