@@ -8,8 +8,8 @@ import './Stamps.scss'
 import arrow from '../assets/down-arrow-2.svg'
 import spaceIcon from '../assets/rounded-black-square-shape.svg'
 
-export default function Stamps (props) {
-	const { 
+export default function Stamps(props) {
+	const {
 		blankSize,
 		largestStamp,
 		setLargestStamp,
@@ -65,7 +65,7 @@ export default function Stamps (props) {
 	}
 
 	const removeStamp = () => {
-		if(selectedStamps.length > 0) {
+		if (selectedStamps.length > 0) {
 			if (selectedStamps.length === 40) {
 				setErrorMessage("")
 			}
@@ -102,6 +102,21 @@ export default function Stamps (props) {
 		}
 	}
 
+	const stampControls = [
+		{
+			label: "Clear",
+			action: clearStamps
+		},
+		{
+			label: "Backspace",
+			action: removeStamp
+		},
+		{
+			label: "Space",
+			action: addSpace
+		}
+	]
+
 	return (
 		<section className="stamps">
 			<img
@@ -112,26 +127,6 @@ export default function Stamps (props) {
 				onClick={() => prevStampSet()}
 			/>
 			<div className="stamp-keyboard">
-				<div className="stamp-controls">
-					<div
-						className="stamp-control-button"
-						onClick={() => addSpace()}
-					>
-						Space
-					</div>
-					<div 
-						className="stamp-control-button" 
-						onClick={() => removeStamp()}
-					>
-						Backspace
-					</div>
-					<div 
-						className="stamp-control-button"
-						onClick={() => clearStamps()}
-					>
-						Clear
-					</div>
-				</div>
 				<div className="stamp-set">
 					{stampSetNames.length > 0 && stamps[stampSetNames[currentSet]].map(stamp => {
 						const fitsBlank = blankSize > (stamp.size * 0.0393701) + 0.015
@@ -169,7 +164,21 @@ export default function Stamps (props) {
 				title="go forward"
 				src={arrow}
 				onClick={() => nextStampSet()}
-			/>			
+			/>
+			<div className="stamp-controls">
+				{stampControls.map(control => (
+					<div
+						key={`control-${control.label}`}
+						className="stamp-control-button"
+						onClick={control.action}
+						style={{
+							width: control.label === 'Space' ? '40%' : 'auto'
+						}}
+					>
+						{control.label}
+					</div>
+				))}
+			</div>
 		</section>
 	)
 }

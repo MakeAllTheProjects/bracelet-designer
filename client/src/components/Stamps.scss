@@ -4,21 +4,15 @@
 	@include center-h;
 	display: grid;
 	grid-template-columns: 9rem auto 9rem;
+	grid-template-rows: auto 1fr;
+	margin-top: 2rem;
+	padding-top: 1.5rem;
+	border-top: solid 0.2rem $white65;
 
 	.stamp-keyboard {
-		.stamp-controls {
-			@include center-h;
-			height: 3rem;
-			margin-bottom: 1.5rem;
-
-			.stamp-control-button {
-				@include keyboard-button;
-				padding: 0.5rem 3rem 0.5rem 3rem;
-				@include font-two;
-				text-transform: uppercase;
-			}
-		}
-
+		grid-row: 1;
+		grid-column: 2;
+		
 		.stamp-set {
 			grid-column: 2/3;
 			@include center-h;
@@ -39,6 +33,7 @@
 	}
 
 	.arrow {
+		grid-row: 1;
 		margin: 0 3rem 0 3rem;
 		width: 4rem;
 		filter: invert(90%) opacity(80%);
@@ -57,5 +52,24 @@
 	.arrow.right {
 		grid-column: 3/4;
 		transform: rotate(270deg);
+	}
+
+	.stamp-controls {
+		grid-column: 1/4;
+		grid-row: 2;
+		@include center-h;
+		margin-top: 1.5rem;
+		padding: 1.5rem 0;
+		border-top: solid 0.2rem $white4;
+		border-bottom: solid 0.2rem $white65;
+
+		.stamp-control-button {
+			@include keyboard-button;
+			padding: 0.5rem 3rem 0.5rem 3rem;
+			max-width: 30rem;
+			@include font-two;
+			text-align: center;
+			text-transform: uppercase;
+		}
 	}
 }
