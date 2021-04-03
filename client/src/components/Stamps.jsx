@@ -133,6 +133,12 @@ export default function Stamps(props) {
 			} else if (keyPressed === 'Backspace') {
 				removeStamp()
 				setKeyPressed('')
+			} else if (keyPressed === 'ArrowLeft') {
+				prevStampSet()
+				setKeyPressed('')
+			} else if (keyPressed === 'ArrowRight') {
+				nextStampSet()
+				setKeyPressed('')
 			} else {
 				const filtered = stamps?.[stampSetNames?.[currentSet]] ? stamps[stampSetNames[currentSet]].filter(stamp => stamp.text === keyPressed) : []
 				if (filtered.length > 0) {
