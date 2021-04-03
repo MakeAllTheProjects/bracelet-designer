@@ -1,10 +1,8 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { baseURL } from '../App'
-
 import './Stamps.scss'
-
 import arrow from '../assets/down-arrow-2.svg'
 import spaceIcon from '../assets/rounded-black-square-shape.svg'
 
@@ -18,21 +16,14 @@ export default function Stamps(props) {
 		setErrorMessage
 	} = props
 
-	const [stampSetNames, setStampSetNames] = React.useState([])
-	const [stamps, setStamps] = React.useState({})
-	const [currentSet, setCurrentSet] = React.useState(0)
+	const [stampSetNames, setStampSetNames] = useState([])
+	const [stamps, setStamps] = useState({})
+	const [currentSet, setCurrentSet] = useState(0)
+	const [keyPressed, setKeyPressed] = useState('')
 
-	React.useEffect(() => {
-		console.log(stamps)
-		if (Object.keys(stamps).length === 0) {
-			axios.get(`${baseURL}/api/stamps`)
-				.then(res => {
-					console.log(res.data.stamps)
-					setStamps(res.data.stamps)
-					setStampSetNames(Object.keys(res.data.stamps))
-				})
-		}
-	}, [stamps])
+	const keyPress = (event) => {
+		event.key && setKeyPressed(event.key)
+	}
 
 	const nextStampSet = () => {
 		if (currentSet === stampSetNames.length - 1) {
@@ -50,8 +41,8 @@ export default function Stamps(props) {
 		}
 	}
 
-	const selectStamp = (stamp, fitsBlank) => {
-		if (fitsBlank) {
+	const selectStamp = (stamp, fits) => {
+		if (fits) {
 			if (selectedStamps.length < 40) {
 				const newStampSet = [...selectedStamps, stamp]
 				setSelectedStamps(newStampSet)
@@ -117,6 +108,42 @@ export default function Stamps(props) {
 		}
 	]
 
+	const fitsBlank = (size) => blankSize > (size * 0.0393701) + 0.015
+
+	useEffect(() => {
+		window.addEventListener("keydown", event => keyPress(event))
+		return window.removeEventListener("keydown", event => keyPress(event))
+	}, [])
+
+	useEffect(() => {
+		if (Object.keys(stamps).length === 0) {
+			axios.get(`${baseURL}/api/stamps`)
+				.then(res => {
+					setStamps(res.data.stamps)
+					setStampSetNames(Object.keys(res.data.stamps))
+				})
+		}
+	}, [stamps])
+
+	useEffect(() => {
+		if (keyPressed !== '') {
+			if (keyPressed === ' ') {
+				addSpace()
+				setKeyPressed('')
+			} else if (keyPressed === 'Backspace') {
+				removeStamp()
+				setKeyPressed('')
+			} else {
+				const filtered = stamps?.[stampSetNames?.[currentSet]] ? stamps[stampSetNames[currentSet]].filter(stamp => stamp.text === keyPressed) : []
+				if (filtered.length > 0) {
+					selectStamp(filtered[0], fitsBlank(filtered[0].size))
+				}
+				setKeyPressed('')
+			}
+		}
+	}, [keyPressed])
+
+
 	return (
 		<section className="stamps">
 			<img
@@ -129,8 +156,6 @@ export default function Stamps(props) {
 			<div className="stamp-keyboard">
 				<div className="stamp-set">
 					{stampSetNames.length > 0 && stamps[stampSetNames[currentSet]].map(stamp => {
-						const fitsBlank = blankSize > (stamp.size * 0.0393701) + 0.015
-						console.log(stamp.size)
 						return (
 							<div
 								key={stamp.id}
@@ -139,8 +164,8 @@ export default function Stamps(props) {
 									{
 										height: `${stamp.size * 0.75}rem`,
 										width: stamps[stampSetNames[currentSet]].includes("symbol") ? 'auto' : `${stamp.size * 0.75}rem`,
-										background: fitsBlank ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.15)',
-										boxShadow: fitsBlank ? 'rgba(0, 0, 0, 0.25) 0.5rem 0.5rem 0.5rem' : 'none'
+										background: fitsBlank(stamp.size) ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.15)',
+										boxShadow: fitsBlank(stamp.size) ? 'rgba(0, 0, 0, 0.25) 0.5rem 0.5rem 0.5rem' : 'none'
 									}
 								}
 								title={stamp.text}
