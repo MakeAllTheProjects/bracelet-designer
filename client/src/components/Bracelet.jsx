@@ -20,6 +20,9 @@ export default function Bracelet(props) {
 				transition: 'all ease 1s'
 			}}
 		>
+			{selectedStamps?.length > 0 && (
+				<div className="center-mark" />
+			)}
 			<div
 				className="bracelet"
 				style={{
