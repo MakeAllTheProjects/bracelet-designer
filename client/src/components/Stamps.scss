@@ -9,6 +9,10 @@
 	padding-top: 1.5rem;
 	border-top: solid 0.2rem $white65;
 
+	@include tablet-and-smaller {
+		margin-top: 0;
+	}
+
 	.stamp-keyboard {
 		grid-row: 1;
 		grid-column: 2;
