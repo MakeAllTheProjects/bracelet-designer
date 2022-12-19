@@ -6,16 +6,14 @@ import './Stamps.scss'
 import arrow from '../assets/down-arrow-2.svg'
 import spaceIcon from '../assets/rounded-black-square-shape.svg'
 
-export default function Stamps(props) {
-	const {
-		blankSize,
-		largestStamp,
-		setLargestStamp,
-		selectedStamps,
-		setSelectedStamps,
-		setErrorMessage
-	} = props
-
+export default function Stamps({
+	blankSize,
+	largestStamp,
+	setLargestStamp,
+	selectedStamps,
+	setSelectedStamps,
+	setErrorMessage
+}) {
 	const [stampSetNames, setStampSetNames] = useState([])
 	const [stamps, setStamps] = useState({})
 	const [currentSet, setCurrentSet] = useState(0)
@@ -121,6 +119,7 @@ export default function Stamps(props) {
 				.then(res => {
 					setStamps(res.data.stamps)
 					setStampSetNames(Object.keys(res.data.stamps))
+					res.data.stamps?.lollipop && setCurrentSet(1) // TODO - fix so actually calling a specific set so future proofed against adding sets.
 				})
 		}
 	}, [stamps])
@@ -163,7 +162,7 @@ export default function Stamps(props) {
 				<div className="stamp-set">
 					{stampSetNames.length > 0 && stamps[stampSetNames[currentSet]].map(stamp => {
 						return (
-							<div
+							<button
 								key={stamp.id}
 								className="stamp"
 								style={
@@ -184,7 +183,7 @@ export default function Stamps(props) {
 										opacity: fitsBlank ? '100%' : '30%'
 									}}
 								/>
-							</div>
+							</button>
 						)
 					})}
 				</div>

@@ -27,10 +27,12 @@
 			.stamp {
 				@include center-h;
 				@include keyboard-button;
+				outline: none;
 
 				img {
 					max-height: 80%;
 					max-width: 80%;
+					filter: invert(100%);
 				}
 			}
 		}
